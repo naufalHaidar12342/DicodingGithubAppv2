@@ -16,6 +16,7 @@
 
     <style name="Application_SplashScreen" parent="Theme.SplashScreen">
         <item name="windowSplashScreenAnimatedIcon">@drawable/github_octocat_logo_vector_png_octodex_api_octodex_json_at_master_cocoaheads_miami_octodex_288x288</item>
+        <item name="windowSplashScreenBackground">@color/octocat_main_color</item>
         <item name="postSplashScreenTheme">@style/Theme.GithubUserV2</item>
     </style>
 </resources>
