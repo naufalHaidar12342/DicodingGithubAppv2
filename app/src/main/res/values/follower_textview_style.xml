@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="follower_style" parent="TextAppearance.AppCompat">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="drawableStartCompat">@drawable/ic_baseline_people_24</item>
+        <item name="android:padding">4dp</item>
+
+    </style>
+</resources>
