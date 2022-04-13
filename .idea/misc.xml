@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Android Development Dicoding x Bangkit/GithubUserv2/app/src/main/res/drawable/ic_baseline_location_on_24.xml" value="0.1" />
+        <entry key="..\:/Android Development Dicoding x Bangkit/GithubUserv2/app/src/main/res/drawable/ic_baseline_person_search_24.xml" value="0.2285" />
         <entry key="..\:/Android Development Dicoding x Bangkit/GithubUserv2/app/src/main/res/layout/activity_main.xml" value="0.22554347826086957" />
-        <entry key="..\:/Android Development Dicoding x Bangkit/GithubUserv2/app/src/main/res/layout/fragment_search_user.xml" value="0.5" />
+        <entry key="..\:/Android Development Dicoding x Bangkit/GithubUserv2/app/src/main/res/layout/fragment_search_user.xml" value="0.33" />
         <entry key="..\:/Android Development Dicoding x Bangkit/GithubUserv2/app/src/main/res/layout/github_user_card.xml" value="0.5" />
       </map>
     </option>

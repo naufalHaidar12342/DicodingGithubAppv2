@@ -10,6 +10,7 @@ import xyz.heydarrn.githubuserv2.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private lateinit var bindMainActivity : ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)

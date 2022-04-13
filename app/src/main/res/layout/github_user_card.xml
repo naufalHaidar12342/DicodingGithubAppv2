@@ -2,8 +2,14 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/user_profile_card"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginStart="14dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginEnd="14dp"
+    app:cardBackgroundColor="@color/octocat_second_color"
+    app:cardCornerRadius="10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -11,11 +17,12 @@
 
         <ImageView
             android:id="@+id/github_profile_picture"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
+            android:contentDescription="@string/image_description"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -24,10 +31,15 @@
 
         <TextView
             android:id="@+id/github_username"
-            android:layout_width="wrap_content"
+            style="@style/fullname_style"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:text="TextView"
+            android:layout_marginEnd="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/full_name_design_placeholder"
+            android:textColor="#FFFFFF"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.437"
             app:layout_constraintStart_toEndOf="@+id/github_profile_picture"
@@ -35,10 +47,19 @@
 
         <Button
             android:id="@+id/visit_profile_button"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
             android:layout_marginBottom="16dp"
-            android:text="Button"
+            android:backgroundTint="@color/octocat_tentacle_suction"
+            android:drawableStart="@drawable/ic_baseline_person_search_24"
+            android:drawablePadding="2dp"
+            android:elegantTextHeight="false"
+            android:hapticFeedbackEnabled="true"
+            android:text="@string/button_visit_profile"
+            android:textAlignment="center"
+            android:textColor="#263238"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.438"

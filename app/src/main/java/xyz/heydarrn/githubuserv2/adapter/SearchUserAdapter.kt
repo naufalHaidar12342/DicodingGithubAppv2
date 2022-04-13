@@ -1,5 +1,8 @@
 package xyz.heydarrn.githubuserv2.adapter
 
+import android.content.Intent
+import android.net.Uri
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -28,20 +31,26 @@ class SearchUserAdapter:RecyclerView.Adapter<SearchUserAdapter.SearchResultViewH
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .circleCrop()
                     .into(githubProfilePicture)
+                githubUsername.text=itemsItem.login
+                visitProfileButton.setOnClickListener {
+                    val showInBrowser=Intent(Intent.ACTION_VIEW, Uri.parse(itemsItem.htmlUrl))
+                    itemView.context.startActivity(showInBrowser)
+                }
             }
         }
 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchResultViewHolder {
-        TODO("Not yet implemented")
+        val userView=GithubUserCardBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return SearchResultViewHolder(userView)
     }
 
     override fun onBindViewHolder(holder: SearchResultViewHolder, position: Int) {
-        TODO("Not yet implemented")
+        holder.bindData(list[position])
     }
 
     override fun getItemCount(): Int {
-        TODO("Not yet implemented")
+        return list.size
     }
 }
