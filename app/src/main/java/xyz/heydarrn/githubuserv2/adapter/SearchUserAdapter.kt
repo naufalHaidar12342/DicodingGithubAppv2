@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import xyz.heydarrn.githubuserv2.R
 import xyz.heydarrn.githubuserv2.databinding.GithubUserCardBinding
 import xyz.heydarrn.githubuserv2.model.SearchUserDiffCallback
 import xyz.heydarrn.githubuserv2.network.ItemsItem
@@ -31,7 +32,7 @@ class SearchUserAdapter:RecyclerView.Adapter<SearchUserAdapter.SearchResultViewH
                     .diskCacheStrategy(DiskCacheStrategy.AUTOMATIC)
                     .circleCrop()
                     .into(githubProfilePicture)
-                githubUsername.text=itemsItem.login
+                githubUsername.text=itemView.resources.getString(R.string.username_template, itemsItem.login)
                 visitProfileButton.setOnClickListener {
                     val showInBrowser=Intent(Intent.ACTION_VIEW, Uri.parse(itemsItem.htmlUrl))
                     itemView.context.startActivity(showInBrowser)

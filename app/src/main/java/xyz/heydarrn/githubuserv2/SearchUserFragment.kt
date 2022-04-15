@@ -33,6 +33,10 @@ class SearchUserFragment : Fragment(),LoadingAnimation {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //hide progress bar when app launched.
+        // just hiding it, not make it disappear/gone (gone means this object will be set to 0,0)
+        bindingSearchUser?.searchProgressBar?.visibility=View.INVISIBLE
+
         getInsertedUsername()
         setAdapter()
         observeViewModel()

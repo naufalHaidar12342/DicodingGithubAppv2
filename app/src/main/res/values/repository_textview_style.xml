@@ -3,7 +3,6 @@
     <style name="repository_style" parent="TextAppearance.AppCompat">
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">14sp</item>
-        <item name="drawableStartCompat">@drawable/ic_baseline_folder_24</item>
         <item name="android:padding">4dp</item>
         <item name="android:drawablePadding">4dp</item>
 
