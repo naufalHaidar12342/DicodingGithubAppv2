@@ -19,4 +19,6 @@
     <string name="user_repository_design_placeholder">4 repository</string>
     <string name="user_location_design_placeholder">Location : Jakarta</string>
     <string name="user_company_design_placeholder">Company : Bright Idea, Inc.</string>
+    <string name="theme_settings">Theme Settings</string>
+    <string name="favourite_user">Favourite User</string>
 </resources>
