@@ -6,18 +6,18 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 import xyz.heydarrn.githubuserv2.BuildConfig
+import xyz.heydarrn.githubuserv2.network.DetailedUserInfoResponse
 import xyz.heydarrn.githubuserv2.network.ItemsItem
 import xyz.heydarrn.githubuserv2.network.SearchResultResponse
 
 interface ApiService {
-
     @Headers(GITHUB_TOKEN)
     @GET("search/users")
     fun searchInsertedUsername(@Query("q") insertedUsername:String) : Call<SearchResultResponse>
 
     @Headers(GITHUB_TOKEN)
     @GET("users/{username}")
-    fun getSelectedUserInfo(@Path("username") showUsernameInfo:String)
+    fun getSelectedUserInfo(@Path("username") showUsernameInfo:String) :Call<DetailedUserInfoResponse>
 
     @Headers(GITHUB_TOKEN)
     @GET("users/{username}/followers")

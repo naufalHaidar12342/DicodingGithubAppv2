@@ -14,7 +14,7 @@ data class DetailedUserInfoResponse(
 	val bio: String? = null,
 
 	@field:SerializedName("company")
-	val company: Any? = null,
+	val company: String? = null,
 
 	@field:SerializedName("location")
 	val location: String? = null,

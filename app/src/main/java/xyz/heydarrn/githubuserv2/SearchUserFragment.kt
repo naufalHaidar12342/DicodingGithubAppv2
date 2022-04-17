@@ -1,11 +1,14 @@
 package xyz.heydarrn.githubuserv2
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,6 +18,8 @@ import kotlinx.coroutines.launch
 import xyz.heydarrn.githubuserv2.adapter.SearchUserAdapter
 import xyz.heydarrn.githubuserv2.databinding.FragmentSearchUserBinding
 import xyz.heydarrn.githubuserv2.model.LoadingAnimation
+import xyz.heydarrn.githubuserv2.model.OnSelectedUser
+import xyz.heydarrn.githubuserv2.network.ItemsItem
 import xyz.heydarrn.githubuserv2.viewmodel.SearchedUserViewModel
 
 
@@ -49,11 +54,26 @@ class SearchUserFragment : Fragment(),LoadingAnimation {
             this.layoutManager= LinearLayoutManager(context)
             this.adapter=searchedUserAdapter
         }
+        searchedUserAdapter.setChoosenUser(object : OnSelectedUser {
+            override fun selectThisUser(selectedUser: ItemsItem) {
+                val detailFragment=UserDetailFragment()
+                val bundleUsername=Bundle()
+
+                bundleUsername.putString(UserDetailFragment.USERNAME_FROM_SEARCH,selectedUser.login)
+                detailFragment.arguments=bundleUsername
+                parentFragmentManager.commit {
+                    setReorderingAllowed(true)
+                    replace<UserDetailFragment>(R.id.fragment_container, args = bundleUsername)
+                    addToBackStack(null)
+                }
+            }
+
+        })
     }
     private fun observeViewModel(){
         userViewModel.apply {
             viewModelScope.launch(Dispatchers.Main){
-                setResultForAdapter().observe(viewLifecycleOwner){ newList->
+                monitorSearchLiveData().observe(viewLifecycleOwner){ newList->
                     if (newList!=null){
                         searchedUserAdapter.setListForAdapter(newList)
                         showLoadingProgress(false)
@@ -93,8 +113,5 @@ class SearchUserFragment : Fragment(),LoadingAnimation {
         _bindingSearchUser=null
     }
 
-    companion object {
-
-    }
 
 }

@@ -40,7 +40,7 @@ class SearchedUserViewModel : ViewModel() {
         })
     }
 
-    fun setResultForAdapter(): LiveData<ArrayList<ItemsItem>> = listOfSearchedUser
+    fun monitorSearchLiveData(): LiveData<ArrayList<ItemsItem>> = listOfSearchedUser
 
 
 }
