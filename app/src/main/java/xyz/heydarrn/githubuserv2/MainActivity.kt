@@ -2,10 +2,8 @@ package xyz.heydarrn.githubuserv2
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
-import android.view.View
+import android.view.*
+import androidx.appcompat.app.ActionBar
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.add
 import androidx.fragment.app.commit
@@ -31,31 +29,4 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        val optionMenuInflater:MenuInflater=menuInflater
-        optionMenuInflater.inflate(R.menu.option_menu,menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
-            R.id.favourite_user_option ->{
-                supportFragmentManager.commit {
-                    setReorderingAllowed(true)
-                    replace<FavouriteUserFragment>(R.id.fragment_container)
-                    addToBackStack(null)
-                }
-                return true
-            }
-            R.id.theme_change_option->{
-                supportFragmentManager.commit {
-                    setReorderingAllowed(true)
-                    replace<ThemeSettingFragment>(R.id.fragment_container)
-                    addToBackStack(null)
-                }
-                return true
-            }
-            else ->return true
-        }
-    }
 }
