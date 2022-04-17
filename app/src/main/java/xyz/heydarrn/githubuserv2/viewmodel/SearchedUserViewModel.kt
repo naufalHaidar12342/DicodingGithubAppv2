@@ -4,9 +4,6 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -19,6 +16,7 @@ class SearchedUserViewModel : ViewModel() {
     private val listOfSearchedUser: LiveData<ArrayList<ItemsItem>> = _listOfSearchedUser
 
     fun searchUserOnSubmittedText(findUser:String){
+
         val client= ApiConfig.getApiService().searchInsertedUsername(findUser)
         client.enqueue(object : Callback<SearchResultResponse> {
 
@@ -43,5 +41,6 @@ class SearchedUserViewModel : ViewModel() {
     }
 
     fun setResultForAdapter(): LiveData<ArrayList<ItemsItem>> = listOfSearchedUser
+
 
 }

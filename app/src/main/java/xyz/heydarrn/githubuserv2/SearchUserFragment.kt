@@ -9,6 +9,7 @@ import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import xyz.heydarrn.githubuserv2.adapter.SearchUserAdapter
@@ -87,7 +88,6 @@ class SearchUserFragment : Fragment(),LoadingAnimation {
             false ->bindingSearchUser?.searchProgressBar?.visibility=View.GONE
         }
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _bindingSearchUser=null
