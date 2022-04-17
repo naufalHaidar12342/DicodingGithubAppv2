@@ -35,12 +35,14 @@ class UserDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        if (savedInstanceState!=null){
-            parentFragmentManager.commit {
-                replace<UserDetailFragment>(R.id.fragment_container)
-                addToBackStack(null)
-            }
-        }
+        //since this fragment only created when user click
+        //the search result, we don't need to perform additional replace fragment
+//        if (savedInstanceState!=null){
+//            parentFragmentManager.commit {
+//                replace<UserDetailFragment>(R.id.fragment_container)
+//                addToBackStack(null)
+//            }
+//        }
         setTabLayout()
         showsUser()
     }
