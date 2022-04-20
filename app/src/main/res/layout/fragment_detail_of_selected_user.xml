@@ -169,8 +169,7 @@
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/view_pager2_detail_of_user"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:alpha="0" />
+                android:layout_height="match_parent" />
 
         </LinearLayout>
 

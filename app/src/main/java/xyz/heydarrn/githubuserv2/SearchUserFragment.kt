@@ -63,11 +63,9 @@ class SearchUserFragment : Fragment(),LoadingAnimation {
         }
         searchedUserAdapter.setChoosenUser(object : OnSelectedUser {
             override fun selectThisUser(selectedUser: ItemsItem) {
-                val detailFragment=DetailOfSelectedUserFragment()
                 val bundleUsername=Bundle()
-
                 bundleUsername.putString(DetailOfSelectedUserFragment.USERNAME_FROM_SEARCH,selectedUser.login)
-                detailFragment.arguments=bundleUsername
+
                 parentFragmentManager.commit {
                     setReorderingAllowed(true)
                     replace<DetailOfSelectedUserFragment>(R.id.fragment_container, args = bundleUsername)

@@ -21,16 +21,13 @@ class FollowerViewModel : ViewModel() {
                 call: Call<ArrayList<UserFollowerResponse>>,
                 response: Response<ArrayList<UserFollowerResponse>>
             ) {
-                if (response.isSuccessful) {
-                    _showFollowerOfUser.postValue(response.body())
+                if (response.isSuccessful){
+                    _showFollowerOfUser.value=response.body()
                 }
                 Log.d("follower success", "onResponse: ${response.message()}")
             }
 
-            override fun onFailure(
-                call: Call<ArrayList<UserFollowerResponse>>,
-                t: Throwable
-            ) {
+            override fun onFailure(call: Call<ArrayList<UserFollowerResponse>>, t: Throwable) {
                 Log.d("follower fail", "onFailure: ${t.message}")
             }
 

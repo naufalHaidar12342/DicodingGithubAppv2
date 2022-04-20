@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.commit
-import androidx.fragment.app.replace
-import androidx.fragment.app.viewModels
+import androidx.core.os.bundleOf
+import androidx.fragment.app.*
 import androidx.lifecycle.viewModelScope
 import androidx.viewpager2.widget.ViewPager2
 import com.bumptech.glide.Glide
@@ -92,7 +90,8 @@ class DetailOfSelectedUserFragment : Fragment() {
         receiveUsername=arguments?.getString(USERNAME_FROM_SEARCH)
 
         //with Bundle, sending string to fragment that associated with selected tab
-        sendToFollowerAndFollowingFragment.putString(SEND_USERNAME,receiveUsername)
+//        sendToFollowerAndFollowingFragment.putString(SEND_USERNAME,receiveUsername)
+        childFragmentManager.setFragmentResult("request_username", bundleOf(SEND_USERNAME to receiveUsername ))
 
         //we got username, then pass it/feed it into setUserDetailedInfo()
         receiveUsername?.let { usernameChosen ->

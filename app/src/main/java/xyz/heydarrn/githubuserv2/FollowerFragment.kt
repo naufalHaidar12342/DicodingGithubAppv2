@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,7 +20,7 @@ class FollowerFragment : Fragment(), LoadingAnimation {
     private val bindingFollower get() = _bindingFollower
     private val followerViewModel by viewModels<FollowerViewModel>()
     private val followerAdapter by lazy { UserFollowerAdapter() }
-    private lateinit var followerName:String
+    private var followerName:String=""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,16 +30,24 @@ class FollowerFragment : Fragment(), LoadingAnimation {
         return bindingFollower?.root
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFollowerRecyclerView()
+        setFragmentResultListener("request_username"){ _, bundle ->
+            followerName=bundle.getString(DetailOfSelectedUserFragment.SEND_USERNAME).toString()
+        }
         setFollowerOfThisUser()
         observeFollowerData()
+        setFollowerRecyclerView()
     }
 
     private fun setFollowerOfThisUser(){
         val argumentReceived=arguments
-        followerName=argumentReceived?.getString(DetailOfSelectedUserFragment.SEND_USERNAME).toString()
+//        followerName=argumentReceived?.getString(DetailOfSelectedUserFragment.SEND_USERNAME).toString()
         followerViewModel.setUserFollowersInfo(followerName)
     }
 
@@ -46,8 +55,8 @@ class FollowerFragment : Fragment(), LoadingAnimation {
         followerViewModel.viewModelScope.launch {
             followerViewModel.setSelectedUserFollowersInfo().observe(viewLifecycleOwner){ monitorThisList ->
                 if (monitorThisList!=null){
-                    showLoadingProgress(false)
                     followerAdapter.setListOfFollower(monitorThisList)
+                    showLoadingProgress(false)
                 }
             }
         }
@@ -71,4 +80,5 @@ class FollowerFragment : Fragment(), LoadingAnimation {
             false -> bindingFollower?.progressBarFollower?.visibility=View.GONE
         }
     }
+
 }
