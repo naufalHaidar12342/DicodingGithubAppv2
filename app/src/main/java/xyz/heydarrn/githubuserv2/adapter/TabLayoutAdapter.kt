@@ -2,6 +2,7 @@ package xyz.heydarrn.githubuserv2.adapter
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import xyz.heydarrn.githubuserv2.FollowerFragment
 import xyz.heydarrn.githubuserv2.FollowingFragment

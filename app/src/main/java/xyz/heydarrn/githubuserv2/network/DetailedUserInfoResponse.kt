@@ -10,9 +10,6 @@ data class DetailedUserInfoResponse(
 	@field:SerializedName("name")
 	val name: String? = null,
 
-	@field:SerializedName("bio")
-	val bio: String? = null,
-
 	@field:SerializedName("company")
 	val company: String? = null,
 

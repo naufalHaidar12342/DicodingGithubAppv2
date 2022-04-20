@@ -1,11 +1,10 @@
 package xyz.heydarrn.githubuserv2
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.fragment.app.viewModels
@@ -25,7 +24,7 @@ class DetailOfSelectedUserFragment : Fragment() {
     private var _bindingDetailUser:FragmentDetailOfSelectedUserBinding? = null
     private val bindingDetailUser get() = _bindingDetailUser
     private val detailViewModel by viewModels<UserDetailViewModel>()
-    private val sendToFollowerAndFollowingFragment by lazy { Bundle() }
+    private var sendToFollowerAndFollowingFragment=Bundle()
     private var receiveUsername:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,6 +42,11 @@ class DetailOfSelectedUserFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setOptionMenuForThisFragment()
+        setTabLayout()
+        showsUser()
+    }
+    private fun setOptionMenuForThisFragment(){
         bindingDetailUser?.toolbar?.apply {
             inflateMenu(R.menu.option_menu)
             setOnMenuItemClickListener { itemFromMenu->
@@ -67,19 +71,20 @@ class DetailOfSelectedUserFragment : Fragment() {
                 }
             }
         }
-        setTabLayout()
-        showsUser()
     }
-
     private fun setTabLayout(){
         val tabSection= TabLayoutAdapter(this,sendToFollowerAndFollowingFragment)
         val viewpagers: ViewPager2? =bindingDetailUser?.viewPager2DetailOfUser
         viewpagers?.adapter=tabSection
 
         val tabs: TabLayout?=bindingDetailUser?.tabLayoutDetailOfUser
-        TabLayoutMediator(tabs!!,viewpagers!!) { tab, tabPosition ->
-            tab.text = resources.getString(TAB_NAMES[tabPosition])
-        }.attach()
+        viewpagers?.let {
+            if (tabs != null) {
+                TabLayoutMediator(tabs, it) { tab, tabPosition ->
+                    tab.text = resources.getString(TAB_NAMES[tabPosition])
+                }.attach()
+            }
+        }
     }
     private fun showsUser(){
         //receive bundle, sent from Search User Fragment

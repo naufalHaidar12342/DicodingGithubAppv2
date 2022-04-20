@@ -6,9 +6,7 @@ import retrofit2.http.Headers
 import retrofit2.http.Path
 import retrofit2.http.Query
 import xyz.heydarrn.githubuserv2.BuildConfig
-import xyz.heydarrn.githubuserv2.network.DetailedUserInfoResponse
-import xyz.heydarrn.githubuserv2.network.ItemsItem
-import xyz.heydarrn.githubuserv2.network.SearchResultResponse
+import xyz.heydarrn.githubuserv2.network.*
 
 interface ApiService {
     @Headers(GITHUB_TOKEN)
@@ -21,11 +19,11 @@ interface ApiService {
 
     @Headers(GITHUB_TOKEN)
     @GET("users/{username}/followers")
-    fun selectedUserFollower(@Path("username") showThisUserFollower:String)
+    fun selectedUserFollower(@Path("username") showThisUserFollower:String):Call<ArrayList<UserFollowerResponse>>
 
     @Headers(GITHUB_TOKEN)
     @GET("users/{username}/following")
-    fun selectedUserFollowing(@Path("username") showThisUserFollowing: String)
+    fun selectedUserFollowing(@Path("username") showThisUserFollowing: String) : Call<ArrayList<UserFollowingResponse>>
 
     companion object{
         const val GITHUB_TOKEN=BuildConfig.PERSONAL_ACCESS_TOKEN
