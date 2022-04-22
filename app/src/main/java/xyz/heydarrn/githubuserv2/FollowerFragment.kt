@@ -1,6 +1,7 @@
 package xyz.heydarrn.githubuserv2
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import androidx.fragment.app.setFragmentResultListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import xyz.heydarrn.githubuserv2.adapter.UserFollowerAdapter
 import xyz.heydarrn.githubuserv2.databinding.FragmentFollowerBinding
@@ -20,7 +22,19 @@ class FollowerFragment : Fragment(), LoadingAnimation {
     private val bindingFollower get() = _bindingFollower
     private val followerViewModel by viewModels<FollowerViewModel>()
     private val followerAdapter by lazy { UserFollowerAdapter() }
-    private var followerName:String=""
+    private var followerName:String?=null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setFragmentResultListener("request_username"){ _, bundle ->
+            val argumentReceived=arguments
+            Log.d("oncreate argument", "onCreate: $argumentReceived")
+            followerName=bundle.getString(DetailOfSelectedUserFragment.USERNAME_FROM_SEARCH)
+            Log.d("receive username", "oncreate: $followerName")
+            followerName?.let { followerViewModel.setUserFollowersInfo(it) }
+
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,33 +44,30 @@ class FollowerFragment : Fragment(), LoadingAnimation {
         return bindingFollower?.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setFragmentResultListener("request_username"){ _, bundle ->
-            followerName=bundle.getString(DetailOfSelectedUserFragment.SEND_USERNAME).toString()
-        }
-        setFollowerOfThisUser()
-        observeFollowerData()
+
         setFollowerRecyclerView()
+        observeFollowerData()
+//        setFollowerOfThisUser()
     }
 
     private fun setFollowerOfThisUser(){
         val argumentReceived=arguments
-//        followerName=argumentReceived?.getString(DetailOfSelectedUserFragment.SEND_USERNAME).toString()
-        followerViewModel.setUserFollowersInfo(followerName)
+//        followerName=argumentReceived?.getString(DetailOfSelectedUserFragment.USERNAME_FROM_SEARCH).toString()
+
+//        followerName?.let { followerViewModel.setUserFollowersInfo(it) }
+
+
     }
 
     private fun observeFollowerData(){
-        followerViewModel.viewModelScope.launch {
+        followerViewModel.viewModelScope.launch(Dispatchers.Main) {
             followerViewModel.setSelectedUserFollowersInfo().observe(viewLifecycleOwner){ monitorThisList ->
                 if (monitorThisList!=null){
                     followerAdapter.setListOfFollower(monitorThisList)
-                    showLoadingProgress(false)
+//                    showLoadingProgress(false)
                 }
             }
         }

@@ -17,6 +17,12 @@ import kotlinx.coroutines.launch
 import xyz.heydarrn.githubuserv2.adapter.TabLayoutAdapter
 import xyz.heydarrn.githubuserv2.databinding.FragmentDetailOfSelectedUserBinding
 import xyz.heydarrn.githubuserv2.viewmodel.UserDetailViewModel
+import xyz.heydarrn.githubuserv2.adapter.ViewPagerAdapter
+
+import androidx.annotation.NonNull
+
+import com.google.android.material.tabs.TabLayoutMediator.TabConfigurationStrategy
+
 
 class DetailOfSelectedUserFragment : Fragment() {
     private var _bindingDetailUser:FragmentDetailOfSelectedUserBinding? = null
@@ -71,7 +77,7 @@ class DetailOfSelectedUserFragment : Fragment() {
         }
     }
     private fun setTabLayout(){
-        val tabSection= TabLayoutAdapter(this,sendToFollowerAndFollowingFragment)
+        val tabSection= TabLayoutAdapter(requireActivity(),sendToFollowerAndFollowingFragment)
         val viewpagers: ViewPager2? =bindingDetailUser?.viewPager2DetailOfUser
         viewpagers?.adapter=tabSection
 
@@ -90,8 +96,12 @@ class DetailOfSelectedUserFragment : Fragment() {
         receiveUsername=arguments?.getString(USERNAME_FROM_SEARCH)
 
         //with Bundle, sending string to fragment that associated with selected tab
-//        sendToFollowerAndFollowingFragment.putString(SEND_USERNAME,receiveUsername)
-        childFragmentManager.setFragmentResult("request_username", bundleOf(SEND_USERNAME to receiveUsername ))
+//        sendToFollowerAndFollowingFragment.putString(USERNAME_FROM_SEARCH,receiveUsername)
+
+        //using Fragment Result API to catch the data
+        childFragmentManager.commit {
+            setFragmentResult("request_username", bundleOf(USERNAME_FROM_SEARCH to receiveUsername ))
+        }
 
         //we got username, then pass it/feed it into setUserDetailedInfo()
         receiveUsername?.let { usernameChosen ->

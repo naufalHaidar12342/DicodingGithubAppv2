@@ -7,7 +7,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import xyz.heydarrn.githubuserv2.FollowerFragment
 import xyz.heydarrn.githubuserv2.FollowingFragment
 
-class TabLayoutAdapter(fragment:Fragment, data:Bundle):FragmentStateAdapter(fragment) {
+class TabLayoutAdapter(fragment:FragmentActivity, data:Bundle):FragmentStateAdapter(fragment) {
     //initialize fragmentBundle value from parameter
     private var fragmentBundle:Bundle = data
 
@@ -18,8 +18,14 @@ class TabLayoutAdapter(fragment:Fragment, data:Bundle):FragmentStateAdapter(frag
     override fun createFragment(position: Int): Fragment {
         var fragment:Fragment?=null
         when(position){
-            0 -> fragment = FollowerFragment()
-            1 -> fragment = FollowingFragment()
+            0 -> {
+                fragment = FollowerFragment()
+                fragment.arguments =this.fragmentBundle
+            }
+            1 -> {
+                fragment = FollowingFragment()
+                fragment.arguments=this.fragmentBundle
+            }
         }
         /*when one of tab selected, it will send argument, containing the bundle here,
         * to the fragment associated with the selected tabs*/

@@ -71,6 +71,10 @@ class SearchUserFragment : Fragment(),LoadingAnimation {
                     replace<DetailOfSelectedUserFragment>(R.id.fragment_container, args = bundleUsername)
                     addToBackStack(null)
                 }
+//                val intent =Intent(context,GithubUserDetailActivity::class.java)
+//                intent.putExtra(GithubUserDetailActivity.SEND_USERNAME,selectedUser.login)
+//                startActivity(intent)
+
             }
 
         })
