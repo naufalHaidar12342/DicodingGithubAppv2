@@ -108,9 +108,7 @@ class DetailOfSelectedUserFragment : Fragment() {
             detailViewModel.setUserDetailedInfo(usernameChosen)
         }
         //observer for selectedUser data
-        detailViewModel.apply {
-            viewModelScope.launch(Dispatchers.Main){
-                detailViewModel.monitorDetailUser().observe(viewLifecycleOwner) { observeUsername ->
+        detailViewModel.monitorDetailUser().observe(viewLifecycleOwner) { observeUsername ->
                     if (observeUsername != null) {
                         bindingDetailUser?.apply {
                             Glide.with(requireActivity())
@@ -145,6 +143,8 @@ class DetailOfSelectedUserFragment : Fragment() {
                         }
                     }
                 }
+        detailViewModel.apply {
+            viewModelScope.launch(Dispatchers.Main){
             }
         }
     }

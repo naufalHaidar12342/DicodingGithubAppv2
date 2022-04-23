@@ -26,6 +26,7 @@ class UserFollowerAdapter : RecyclerView.Adapter<UserFollowerAdapter.FollowerVie
         this.list.addAll(followersList)
         diffResult.dispatchUpdatesTo(this)
     }
+
     inner class FollowerViewHolder(private val userCardBinding: GithubUserCardBinding):RecyclerView.ViewHolder(userCardBinding.root) {
         fun bindFollowerData(bindFollower: UserFollowerResponse) {
             userCardBinding.apply {

@@ -48,7 +48,7 @@ class FollowerFragment : Fragment(), LoadingAnimation {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setFollowerRecyclerView()
+
         observeFollowerData()
 //        setFollowerOfThisUser()
     }
@@ -63,14 +63,17 @@ class FollowerFragment : Fragment(), LoadingAnimation {
     }
 
     private fun observeFollowerData(){
-        followerViewModel.viewModelScope.launch(Dispatchers.Main) {
             followerViewModel.setSelectedUserFollowersInfo().observe(viewLifecycleOwner){ monitorThisList ->
                 if (monitorThisList!=null){
                     followerAdapter.setListOfFollower(monitorThisList)
+                    setFollowerRecyclerView()
 //                    showLoadingProgress(false)
+                    Log.d("log adapter", "observe inside if: $monitorThisList")
                 }
+                Log.d("log adapter", "observeFollowerData: $monitorThisList")
             }
-        }
+//        followerViewModel.viewModelScope.launch(Dispatchers.Main) {
+//        }
     }
 
     private fun setFollowerRecyclerView(){

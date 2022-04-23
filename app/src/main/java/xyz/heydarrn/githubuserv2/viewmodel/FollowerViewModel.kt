@@ -12,7 +12,7 @@ import xyz.heydarrn.githubuserv2.network.api.ApiConfig
 
 class FollowerViewModel : ViewModel() {
     private var _showFollowerOfUser= MutableLiveData<ArrayList<UserFollowerResponse>>()
-    private val showFollowerOfUser: LiveData<ArrayList<UserFollowerResponse>> = _showFollowerOfUser
+    val showFollowerOfUser: LiveData<ArrayList<UserFollowerResponse>> = _showFollowerOfUser
 
     fun setUserFollowersInfo(selectedUser:String){
         val followerClient= ApiConfig.getApiService().selectedUserFollower(selectedUser)
@@ -21,10 +21,10 @@ class FollowerViewModel : ViewModel() {
                 call: Call<ArrayList<UserFollowerResponse>>,
                 response: Response<ArrayList<UserFollowerResponse>>
             ) {
-                if (response.isSuccessful){
+                if (response.isSuccessful && !response.body().isNullOrEmpty()){
                     _showFollowerOfUser.postValue(response.body())
                 }
-                Log.d("follower success", "onResponse: ${response.message()}")
+                Log.d("follower success", "onResponse: ${response.body()}")
             }
 
             override fun onFailure(call: Call<ArrayList<UserFollowerResponse>>, t: Throwable) {
